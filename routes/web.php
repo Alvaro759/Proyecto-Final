@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/email/verify', [VerificationController::class, 'showVerification'])->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verification'])->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', [VerificationController::class, 'sendEmail'])->middleware(['auth'])->name('verification.send');
+
+Route::view('/login', "login")->name('login');
+Route::view('/registro', "register")->name('registro');
+Route::view('/login/failed', "loginFailed")->name('loginFailed');
+
+Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro');
+Route::post('/inicia-sesion', [LoginController::class, 'login'])->name('inicia-sesion');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
