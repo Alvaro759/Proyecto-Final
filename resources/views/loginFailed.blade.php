@@ -12,6 +12,11 @@
 </head>
 
 <body>
+    <div class="d-flex justify-content-center m-3">
+        <div class="alert alert-danger" role="alert">
+            No ha podido loguearse correctamente.
+          </div>
+    </div>
     <main class="container-sm align-center p-5">
         <div class="text-center pb-3">
             <h3>TodoComponentes</h3>

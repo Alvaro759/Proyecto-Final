@@ -41,3 +41,7 @@ div a{
 .bg-custom{
     background-color: #EFEFEF;
 }
+
+#flexCheckDefault {
+    border-radius: 0 !important;
+}
