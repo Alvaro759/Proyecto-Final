@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('login'));
+        return redirect(route('login.login'));
     }
 
     public function login(Request $request)
@@ -44,7 +44,7 @@ class LoginController extends Controller
 
             return redirect()->intended(route('categoria.index'));
         } else {
-            return redirect(route('loginFailed'));
+            return redirect(route('login.loginFailed'));
         }
     }
 
