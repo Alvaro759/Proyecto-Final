@@ -17,7 +17,7 @@ class VerificationController extends Controller
     {
         $request->fulfill();
 
-        return redirect('/inicio');
+        return redirect('/');
     }
 
     public function sendEmail(Request $request)
