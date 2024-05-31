@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TodoComponentes</title>
+    <title>{{ $nombreProducto }} | TodoComponentes</title>
     <link rel="stylesheet" href="{{ asset('Assets/css/styleHome.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -13,10 +13,6 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="{{ asset('Assets/js/menu-desplegable.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous"
-        defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet"
-        crossorigin="anonymous">
 </head>
 
 <body>
@@ -103,76 +99,81 @@
         </div>
     </header>
     <main class="mt-3">
-        <div class="container mt-5">
-            <div class="swiffy-slider">
-                <ul class="slider-container">
-                    <li><img class="border-custom rounded-5" src="{{ asset('Assets/img/portada.webp') }}"
-                            style="max-width: 100%;height: auto;"></li>
-                    <li><img class="border-custom rounded-5" src="{{ asset('Assets/img/portadaApple.webp') }}"
-                            style="max-width: 100%;height: auto;">
-                    </li>
-                    <li><img class="border-custom rounded-5" src="{{ asset('Assets/img/portadaAMD.webp') }}"
-                            style="max-width: 100%;height: auto;"></li>
-                </ul>
+        <div class="mt-3 ms-5 me-5">
+            <div><a class="AHover" href="/">Home</a> <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                    viewBox="0 -960 960 960" width="24px" fill="#777676">
+                    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+                </svg> <a class="AHover" href="/{{ $nombreCategoria }}">{{ $nombreCategoria }}</a> <svg
+                    xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                    fill="#777676">
+                    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+                </svg> <a class="AHover"
+                    href="/{{ $nombreCategoria }}/{{ $nombreProducto }}">{{ $nombreProducto }}</a>
+            </div>
+            <div class="d-flex mt-3">
+                <div>
+                    <img src="{{ asset('Assets/img/productos/' . $product->imagenes[0]) }}"
+                        alt="{{ $nombreProducto }}" width="350px" height="350px">
+                </div>
+                <div class="flex-column w-75">
+                    <div class="d-flex">
+                        <div class="p-3">
+                            <h1>{{ $nombreProducto }}</h1>
+                        </div>
+                        <div class="p-3 flex-fill d-flex justify-content-end align-items-center">
+                            <span class="text-end span-custom">{{ $product->precio }}€</span>
+                        </div>
+                    </div>
+                    <div class="border-custom-2">
+                        <div>
+                            
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end p-3">
+                        @if (Auth::check())
+                            <form class="m-1" action="{{ route('wishlist.add') }}" method="POST"
+                                class="mt-2">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button type="submit" class="button-custom-2"><svg
+                                        xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960"
+                                        width="24px" fill="#000000">
+                                        <path
+                                            d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
+                                    </svg></button>
+                            </form>
 
-                <button type="button" class="slider-nav"></button>
-                <button type="button" class="slider-nav slider-nav-next"></button>
+                            <form class="m-1" action="{{ route('cart.add') }}" method="POST" class="mt-2">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button type="submit" class="button-custom-2">Añadir al carrito</button>
+                            </form>
 
-                <div class="slider-indicators">
-                    <button class="active"></button>
-                    <button></button>
-                    <button></button>
+                            <form class="m-1" action="{{ route('order.buyNow') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button type="submit" class="button-custom-3">Comprar ya</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="m-1 p-1 button-custom-2"><svg
+                                    xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960"
+                                    width="24px" fill="#000000">
+                                    <path
+                                        d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
+                                </svg></a>
+                            <a href="{{ route('login') }}" class="m-1 p-1 button-custom-2">Añadir al carrito</a>
+                            <a href="{{ route('login') }}" class="m-1 p-1 button-custom-3">Comprar ya</a>
+                        @endif
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mt-5">
-            <div class="text-center">
-                <h2>DESTACADO</h2>
-            </div>
-            <div class="container mt-3">
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-
-                    @foreach ($products as $product)
-                        <div class="col">
-                            <a href="/{{ $product->nombreCategoria }}/{{ $product->nombre }}">
-                                <div class="card h-100">
-                                    <img src="{{ asset('Assets/img/productos/' . $product->primerImagen) }}"
-                                        class="card-img-top" alt="{{ $product->nombre }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $product->nombre }}</h5>
-                                        <p class="card-text">{{ $product->precio }}€</p>
-                                        <div class="mt-2 d-flex justify-content-end">
-                                            @if (Auth::check())
-                                                <form class="me-1" action="{{ route('cart.add') }}" method="POST"
-                                                    class="mt-2">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id"
-                                                        value="{{ $product->id }}">
-                                                    <button type="submit" class="button-custom-2">Añadir al
-                                                        carrito</button>
-                                                </form>
-
-                                                <form class="me-1" action="{{ route('order.buyNow') }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id"
-                                                        value="{{ $product->id }}">
-                                                    <button type="submit" class="button-custom-3">Comprar ya</button>
-                                                </form>
-                                            @else
-                                                <a href="{{ route('login') }}" class="me-1 p-1 button-custom-2">Añadir
-                                                    al
-                                                    carrito</a>
-                                                <a href="{{ route('login') }}"
-                                                    class="me-1 p-1 button-custom-3">Comprar
-                                                    ya</a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
+            <div class="border-custom-2 mt-5">
+                <div class="p-2">
+                    <span class="span-custom">Características</span>
+                    <hr>
+                </div>
+                <div class="p-2">
+                    <span>{{ $product->caracteristicas }}</span>
                 </div>
             </div>
         </div>

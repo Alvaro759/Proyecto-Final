@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TodoComponentes</title>
+    <title>{{ $nombreCategoria }} | TodoComponentes</title>
     <link rel="stylesheet" href="{{ asset('Assets/css/styleHome.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -13,10 +13,6 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="{{ asset('Assets/js/menu-desplegable.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous"
-        defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet"
-        crossorigin="anonymous">
 </head>
 
 <body>
@@ -42,7 +38,7 @@
                             </svg></button>
                         <ul>
                             @foreach ($categories as $category)
-                                <li><a class="AHover" href="/{{ $category->nombre }}">{{ $category->nombre }}</a></li>
+                                <li><a class="AHover" href="{{ $category->nombre }}">{{ $category->nombre }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -103,75 +99,50 @@
         </div>
     </header>
     <main class="mt-3">
-        <div class="container mt-5">
-            <div class="swiffy-slider">
-                <ul class="slider-container">
-                    <li><img class="border-custom rounded-5" src="{{ asset('Assets/img/portada.webp') }}"
-                            style="max-width: 100%;height: auto;"></li>
-                    <li><img class="border-custom rounded-5" src="{{ asset('Assets/img/portadaApple.webp') }}"
-                            style="max-width: 100%;height: auto;">
-                    </li>
-                    <li><img class="border-custom rounded-5" src="{{ asset('Assets/img/portadaAMD.webp') }}"
-                            style="max-width: 100%;height: auto;"></li>
-                </ul>
+        <div class="mt-3 ms-5">
+            <div><a class="AHover" href="/">Home</a> <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                    viewBox="0 -960 960 960" width="24px" fill="#777676">
+                    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+                </svg> <a class="AHover" href="/{{ $nombreCategoria }}">{{ $nombreCategoria }}</a></div>
+            <div class="d-flex mt-3">
+                <div class="m-3 w-25">
+                    <div class="d-grid gap-2">
+                        <button class="button-custom-2" type="button">Borrar filtros</button>
+                    </div>
 
-                <button type="button" class="slider-nav"></button>
-                <button type="button" class="slider-nav slider-nav-next"></button>
-
-                <div class="slider-indicators">
-                    <button class="active"></button>
-                    <button></button>
-                    <button></button>
-                </div>
-            </div>
-        </div>
-        <div class="mt-5">
-            <div class="text-center">
-                <h2>DESTACADO</h2>
-            </div>
-            <div class="container mt-3">
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-
-                    @foreach ($products as $product)
-                        <div class="col">
-                            <a href="/{{ $product->nombreCategoria }}/{{ $product->nombre }}">
-                                <div class="card h-100">
-                                    <img src="{{ asset('Assets/img/productos/' . $product->primerImagen) }}"
-                                        class="card-img-top" alt="{{ $product->nombre }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $product->nombre }}</h5>
-                                        <p class="card-text">{{ $product->precio }}€</p>
-                                        <div class="mt-2 d-flex justify-content-end">
-                                            @if (Auth::check())
-                                                <form class="me-1" action="{{ route('cart.add') }}" method="POST"
-                                                    class="mt-2">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id"
-                                                        value="{{ $product->id }}">
-                                                    <button type="submit" class="button-custom-2">Añadir al
-                                                        carrito</button>
-                                                </form>
-
-                                                <form class="me-1" action="{{ route('order.buyNow') }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id"
-                                                        value="{{ $product->id }}">
-                                                    <button type="submit" class="button-custom-3">Comprar ya</button>
-                                                </form>
-                                            @else
-                                                <a href="{{ route('login') }}" class="me-1 p-1 button-custom-2">Añadir
-                                                    al
-                                                    carrito</a>
-                                                <a href="{{ route('login') }}"
-                                                    class="me-1 p-1 button-custom-3">Comprar
-                                                    ya</a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                    <div class="border-custom-2 mt-3">
+                        <div>
+                            <h4 class="text-center color bg-0"> Filtros</h4>
                         </div>
+                        <div class="p-3">
+                            <h4 class="border-bottom">Marcas</h4>
+                            @foreach ($subcategories as $subcategory)
+                                <div class="m-2">
+                                    <input class="checkbox" type="checkbox" name="{{ $subcategory->nombre }}"
+                                        value="{{ $subcategory->nombre }}" id="{{ $subcategory->nombre }}"><label
+                                        class="ms-3"
+                                        for="{{ $subcategory->nombre }}">{{ $subcategory->nombre }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="w-75">
+                    @foreach ($products as $product)
+                        <div class="container-custom m-3"><a class="d-flex"
+                                href="{{ $nombreCategoria }}/{{ $product->nombre }}"><img
+                                    src="{{ asset('Assets/img/productos/' . $product->primerImagen) }}"
+                                    class="rounded p-3" alt="{{ $product->nombre }}" width="200px"
+                                    height="200px ">
+                                <div class="p-3">
+                                    <p><b>{{ $product->nombre }}</b></p>
+                                    <p class="text-color">Envío gratis</p>
+                                    <p class="text-color">Recíbelo entre 3 - 5 días laborales</p>
+                                </div>
+                                <div class="p-3 flex-fill">
+                                    <h2 class="text-end"><b>{{ $product->precio }}€</b></h2>
+                                </div>
+                            </a></div>
                     @endforeach
                 </div>
             </div>

@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('login.login'));
+        return redirect(route('login'));
     }
 
     public function login(Request $request)
@@ -42,9 +42,9 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended(route('categoria.index'));
+            return redirect()->intended(route('home'));
         } else {
-            return redirect(route('login.loginFailed'));
+            return redirect(route('loginFailed'));
         }
     }
 
@@ -55,6 +55,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect(route('categoria.index'));
+        return redirect(route('home'));
     }
 }
