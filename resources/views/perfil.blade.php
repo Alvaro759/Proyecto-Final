@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $nombreProducto }} | TodoComponentes</title>
+    <title>{{ Auth::user()->name }} | TodoComponentes</title>
     <link rel="stylesheet" href="{{ asset('Assets/css/styleHome.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -99,92 +99,28 @@
         </div>
     </header>
     <main class="mt-3">
-        <div class="mt-3 ms-5 me-5">
-            <div><a class="AHover" href="/">Home</a> <svg xmlns="http://www.w3.org/2000/svg" height="24px"
-                    viewBox="0 -960 960 960" width="24px" fill="#777676">
-                    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
-                </svg> <a class="AHover" href="/{{ $nombreCategoria }}">{{ $nombreCategoria }}</a> <svg
-                    xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                    fill="#777676">
-                    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
-                </svg> <a class="AHover"
-                    href="/{{ $nombreCategoria }}/{{ $nombreProducto }}">{{ $nombreProducto }}</a>
-            </div>
-            <div class="d-flex mt-3">
+        <div class="container mt-3 mb-3">
+            @if (session('status') == 'verification-link-sent')
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Un nuevo enlace de verificación ha sido enviado a tu correo electrónico.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
+        <div class="container mt-3">
+            @if (!Auth::user()->hasVerifiedEmail())
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Verifica tu correo electrónico!</strong> Por favor, revisa tu correo y sigue las
+                    instrucciones para verificar tu dirección de email.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 <div>
-                    <img src="{{ asset('Assets/img/productos/' . $product->imagenes[0]) }}"
-                        alt="{{ $nombreProducto }}" width="350px" height="350px">
+                    <form action="{{ route('verification.send') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn-1">Reenviar email</button>
+                    </form>
                 </div>
-                <div class="flex-column w-75">
-                    <div class="d-flex">
-                        <div class="p-3">
-                            <h1>{{ $nombreProducto }}</h1>
-                        </div>
-                        <div class="p-3 flex-fill d-flex justify-content-end align-items-center">
-                            <span class="text-end span-custom">{{ $product->precio }}€</span>
-                        </div>
-                    </div>
-                    <div class="border-custom-2 m-3">
-                        <div class="d-flex flex-column-reverse p-3">
-                            <div class="d-flex justify-content-end">
-                                <p class="text-color">Envío gratis en pedidos superiores a 50€</p>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <p class="text-color">Recíbelo entre 3 - 5 días laborales</p>
-                            </div>
-
-                        </div>
-                        <div class="d-flex justify-content-end p-3">
-                            @if (Auth::check())
-                                <form class="m-1" action="{{ route('wishlist.add') }}" method="POST"
-                                    class="mt-2">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <button type="submit" class="button-custom-2"><svg
-                                            xmlns="http://www.w3.org/2000/svg" height="22px"
-                                            viewBox="0 -960 960 960" width="24px" fill="#000000">
-                                            <path
-                                                d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
-                                        </svg></button>
-                                </form>
-
-                                <form class="m-1" action="{{ route('cart.add') }}" method="POST"
-                                    class="mt-2">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <button type="submit" class="button-custom-2">Añadir al carrito</button>
-                                </form>
-
-                                <form class="m-1" action="{{ route('order.buyNow') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <button type="submit" class="button-custom-3">Comprar ya</button>
-                                </form>
-                            @else
-                                <a href="{{ route('login') }}" class="m-1 p-1 button-custom-2"><svg
-                                        xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960"
-                                        width="24px" fill="#000000">
-                                        <path
-                                            d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
-                                    </svg></a>
-                                <a href="{{ route('login') }}" class="m-1 p-1 button-custom-2">Añadir al carrito</a>
-                                <a href="{{ route('login') }}" class="m-1 p-1 button-custom-3">Comprar ya</a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border-custom-2 mt-5">
-                <div class="p-2">
-                    <span class="span-custom">Características</span>
-                    <hr>
-                </div>
-                <div class="p-2 d-flex flex-column">
-                    @for ($i = 0; $i < count($product->caracteristicas); $i++)
-                        <span>{{ $product->caracteristicas[$i] }}</span>
-                    @endfor
-                </div>
-            </div>
+            @endif
         </div>
     </main>
     <footer class="footer mt-5">

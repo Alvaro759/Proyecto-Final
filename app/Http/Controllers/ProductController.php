@@ -27,6 +27,8 @@ class ProductController extends Controller
         
         $product->imagenes = json_decode($product->imagenes);
 
+        $product->caracteristicas = explode(',', $product->caracteristicas);
+
         return view('product', compact('categories', 'nombreCategoria', 'nombreProducto', 'product'));
     }
 }

@@ -181,6 +181,15 @@ main{
     background-color: white;   
 }
 
+.btn-1{
+    border: 2px solid black;
+    background-color: #7776767b;
+}
+
+.btn-1:hover{
+    background-color: #777676;
+}
+
 .button-custom:hover{
     background-color: #77767620;
 }
