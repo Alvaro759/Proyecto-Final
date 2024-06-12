@@ -10,6 +10,7 @@ class direccione extends Model
     use HasFactory;
 
     protected $fillable = [
+        'idUser',
         'calle', 
         'numero',
         'codigoPostal', 

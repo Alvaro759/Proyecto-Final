@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\ResetPasswordNotification;
+use App\Models\direccione;
+
+use function PHPUnit\Framework\directoryExists;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -22,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'admin',
     ];
 
     /**
@@ -53,4 +57,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function direcciones()
+{
+    return $this->hasMany(direccione::class, 'idUser');
+}
 }

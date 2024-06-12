@@ -229,7 +229,7 @@ li img{
     width: 25%;
 }
 
-.card:hover{
+.card-custom:hover{
     background-color: #7776762e;
 }
 
@@ -245,4 +245,17 @@ li img{
 .span-custom-2{
     font-size: 1rem;
     color: #FF6B00;
+}
+
+.alert-wrapper {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.txt-color{
+    color: #777676;
+}
+
+.small-alert {
+    font-size: 14px;
 }

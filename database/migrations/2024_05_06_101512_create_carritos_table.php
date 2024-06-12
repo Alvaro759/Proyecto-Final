@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('carritos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("idUsuario");
+            $table->foreign("idUsuario")->references("id")->on("users")->onDelete("cascade");
+            $table->unsignedBigInteger("idProducto");
+            $table->foreign("idProducto")->references("id")->on("productos")->onDelete("cascade");
+            $table->integer('Cantidad')->default(1);
             $table->timestamps();
-            $table->string("nombre");
-            $table->unsignedBigInteger("idCategoria");
-            $table->foreign("idCategoria")->references("id")->on("categorias")->onDelete("cascade");
         });
     }
 

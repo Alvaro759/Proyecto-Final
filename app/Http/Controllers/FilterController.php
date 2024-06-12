@@ -13,6 +13,7 @@ class FilterController extends Controller
     public function index($nombreCategoria)
     {
         $categories = categoria::all();
+        $idCategoria = '';
 
         for ($i = 0; $i < count($categories); $i++) {
             if ($categories[$i]['nombre'] == $nombreCategoria) {

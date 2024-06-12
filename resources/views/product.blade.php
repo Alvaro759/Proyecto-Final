@@ -53,12 +53,12 @@
                 </div>
             </div>
             <div class="d-flex align-items-center">
-                @if (Auth::check())
+                @auth
                     <div class="btn-group">
                         <a class="d-flex AHover" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true"
                             aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960"
-                                width="40px" fill="#000000">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"
+                                fill="#000000">
                                 <path
                                     d="M226-262q59-42.33 121.33-65.5 62.34-23.17 132.67-23.17 70.33 0 133 23.17T734.67-262q41-49.67 59.83-103.67T813.33-480q0-141-96.16-237.17Q621-813.33 480-813.33t-237.17 96.16Q146.67-621 146.67-480q0 60.33 19.16 114.33Q185-311.67 226-262Zm253.88-184.67q-58.21 0-98.05-39.95Q342-526.58 342-584.79t39.96-98.04q39.95-39.84 98.16-39.84 58.21 0 98.05 39.96Q618-642.75 618-584.54t-39.96 98.04q-39.95 39.83-98.16 39.83ZM480.31-80q-82.64 0-155.64-31.5-73-31.5-127.34-85.83Q143-251.67 111.5-324.51T80-480.18q0-82.82 31.5-155.49 31.5-72.66 85.83-127Q251.67-817 324.51-848.5T480.18-880q82.82 0 155.49 31.5 72.66 31.5 127 85.83Q817-708.33 848.5-635.65 880-562.96 880-480.31q0 82.64-31.5 155.64-31.5 73-85.83 127.34Q708.33-143 635.65-111.5 562.96-80 480.31-80Zm-.31-66.67q54.33 0 105-15.83t97.67-52.17q-47-33.66-98-51.5Q533.67-284 480-284t-104.67 17.83q-51 17.84-98 51.5 47 36.34 97.67 52.17 50.67 15.83 105 15.83Zm0-366.66q31.33 0 51.33-20t20-51.34q0-31.33-20-51.33T480-656q-31.33 0-51.33 20t-20 51.33q0 31.34 20 51.34 20 20 51.33 20Zm0-71.34Zm0 369.34Z" />
                             </svg>
@@ -82,7 +82,7 @@
                             <span class="none">Cuenta</span>
                         </div>
                     </a>
-                @endif
+                @endauth
             </div>
             <div class="d-flex align-items-center">
                 <a class="d-flex AHover" href="/carrito">
@@ -96,9 +96,38 @@
                     </div>
                 </a>
             </div>
+            @if (Auth::check() && Auth::user()->admin)
+            <div class="d-flex align-items-center">
+                <a class="d-flex AHover" href="/panel-de-control">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"
+                        fill="#000000">
+                        <path
+                            d="M672-288q30 0 51-21t21-51q0-30-21-51t-51-21q-30 0-51 21t-21 51q0 30 21 51t51 21Zm0 144q38 0 70.5-19.15T795-214q-28-18-58.77-28-30.77-10-64-10Q639-252 608-242q-31 10-59 28 20 31.7 52.5 50.85Q634-144 672-144ZM480-96q-133-30-222.5-150.5T168-515v-229l312-120 312 120v221q-22-10-39-16t-33-8v-148l-240-92-240 92v180q0 49 12.5 96t36.5 88.5q24 41.5 58.5 76T425-194q8 23 25.5 48.5T489-98l-4.5 1-4.5 1Zm191.77 0Q592-96 536-152.23q-56-56.22-56-136Q480-368 536.23-424q56.22-56 136-56Q752-480 808-423.77q56 56.22 56 136Q864-208 807.77-152q-56.22 56-136 56ZM480-480Z" />
+                    </svg>
+                    <div class="d-flex align-items-center">
+                        <span class="none">Panel de Control</span>
+                    </div>
+                </a>
+            </div>
+            @endif
         </div>
     </header>
     <main class="mt-3">
+        @if (session('success') == 'Producto añadido al carrito')
+            <div class="alert-wrapper mt-3">
+                <div class="alert alert-success alert-dismissible fade show session-alert small-alert" role="alert">
+                    Producto añadido al carrito correctamente.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @elseif(session('error') == 'Producto no encontrado.')
+            <div class="alert-wrapper mt-3">
+                <div class="alert alert-danger session-alert small-alert" role="danger">
+                    No se pudo agregar el producto al carrito.
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
         <div class="mt-3 ms-5 me-5">
             <div><a class="AHover" href="/">Home</a> <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                     viewBox="0 -960 960 960" width="24px" fill="#777676">
@@ -135,41 +164,22 @@
 
                         </div>
                         <div class="d-flex justify-content-end p-3">
-                            @if (Auth::check())
-                                <form class="m-1" action="{{ route('wishlist.add') }}" method="POST"
-                                    class="mt-2">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <button type="submit" class="button-custom-2"><svg
-                                            xmlns="http://www.w3.org/2000/svg" height="22px"
-                                            viewBox="0 -960 960 960" width="24px" fill="#000000">
-                                            <path
-                                                d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
-                                        </svg></button>
-                                </form>
-
-                                <form class="m-1" action="{{ route('cart.add') }}" method="POST"
-                                    class="mt-2">
+                            @Auth
+                                <form class="m-1" action="{{ route('carrito.add') }}" method="POST" class="mt-2">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <button type="submit" class="button-custom-2">Añadir al carrito</button>
                                 </form>
 
-                                <form class="m-1" action="{{ route('order.buyNow') }}" method="POST">
+                                <form class="m-1" action="{{ route('carrito.comprar') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <button type="submit" class="button-custom-3">Comprar ya</button>
                                 </form>
                             @else
-                                <a href="{{ route('login') }}" class="m-1 p-1 button-custom-2"><svg
-                                        xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960"
-                                        width="24px" fill="#000000">
-                                        <path
-                                            d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
-                                    </svg></a>
                                 <a href="{{ route('login') }}" class="m-1 p-1 button-custom-2">Añadir al carrito</a>
                                 <a href="{{ route('login') }}" class="m-1 p-1 button-custom-3">Comprar ya</a>
-                            @endif
+                            @endauth
                         </div>
                     </div>
                 </div>

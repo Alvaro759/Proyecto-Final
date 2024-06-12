@@ -13,19 +13,25 @@ class LoginController extends Controller
     //
     public function register(Request $request)
     {
-        // Validar los datos
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ]);
 
         $user = new User();
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->password = Hash::make($validatedData['password']);
 
         $user->save();
 
-        $request->user()->sendEmailVerificationNotification();
+        Auth::login($user);
 
-        return redirect(route('login'));
+        $user->sendEmailVerificationNotification();
+
+        return redirect(route('home'));
     }
 
     public function login(Request $request)
@@ -43,7 +49,7 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->route('home');
+            return redirect(route('home'));
         } else {
             return redirect(route('loginFailed'));
         }
@@ -59,11 +65,13 @@ class LoginController extends Controller
         return redirect(route('home'));
     }
 
-    public function forgot_password(){
+    public function forgot_password()
+    {
         return view('auth.forgot-password');
     }
 
-    public function sendEmail_password(Request $request) {
+    public function sendEmail_password(Request $request)
+    {
         $request->validate(['email' => 'required|email']);
 
         $status = Password::sendResetLink(
@@ -71,8 +79,8 @@ class LoginController extends Controller
         );
 
         return $status === Password::RESET_LINK_SENT
-                    ? back()->with(['status' => __($status)])
-                    : back()->withErrors(['email' => __($status)]);
+            ? back()->with(['status' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
     }
 
     public function showResetForm($token)
@@ -97,7 +105,7 @@ class LoginController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withErrors(['email' => [__($status)]]);
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
     }
 }

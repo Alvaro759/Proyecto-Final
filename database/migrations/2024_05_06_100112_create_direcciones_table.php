@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('direcciones', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('idUser');
+            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->string("calle");
             $table->integer("numero");
             $table->integer("codigoPostal");

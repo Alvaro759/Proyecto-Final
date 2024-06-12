@@ -9,8 +9,15 @@ class carrito extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nombre',
-        'idCategoria'
-    ];
+    protected $fillable = ['idUsuario', 'idProducto', 'Cantidad'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(producto::class, 'idProducto');
+    }
 }
