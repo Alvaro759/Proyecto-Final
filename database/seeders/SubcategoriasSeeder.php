@@ -67,7 +67,8 @@ class SubcategoriasSeeder extends Seeder
             ['id' => 50, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now(), 'nombre' => 'BenQ', 'idCategoria' => 9],
             ['id' => 51, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now(), 'nombre' => 'Google', 'idCategoria' => 20],
             ['id' => 52, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now(), 'nombre' => 'Xiaomi', 'idCategoria' => 20],
-            ['id' => 53, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now(), 'nombre' => 'OnePlus', 'idCategoria' => 20]
+            ['id' => 53, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now(), 'nombre' => 'OnePlus', 'idCategoria' => 20],
+            ['id' => 54, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now(), 'nombre' => 'Sony', 'idCategoria' => 20],
         ]);
     }
 }

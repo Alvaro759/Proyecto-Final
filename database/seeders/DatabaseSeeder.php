@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SubcategoriasSeeder::class,
             AlmacenesSeeder::class,
             ProductosSeeder::class,
+            PertenecientesSeeder::class,
         ]);
     }
 }

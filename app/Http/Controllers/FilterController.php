@@ -32,4 +32,34 @@ class FilterController extends Controller
 
         return view('filter', compact('categories', 'nombreCategoria', 'products', 'subcategories'));
     }
+
+    public function filtrar(Request $request, $nombreCategoria)
+    {
+        $categories = categoria::all();
+
+        $categoria = categoria::where('nombre', $nombreCategoria)->firstOrFail();
+        $idCategoria = $categoria->id;
+
+        $subcategories = subcategoria::where('idCategoria', $idCategoria)->get();
+
+        $productosQuery = producto::where('idCategoria', $idCategoria);
+
+        if ($request->filled('subcategorias')) {
+            $subcategoriasSeleccionadas = $request->input('subcategorias');
+            $productosQuery->whereIn('id', function ($query) use ($subcategoriasSeleccionadas) {
+                $query->select('idProducto')
+                      ->from('pertenecientes')
+                      ->whereIn('idSubcategoria', $subcategoriasSeleccionadas);
+            });
+        }
+
+        $products = $productosQuery->get();
+
+        foreach ($products as $product) {
+            $imagenes = json_decode($product->imagenes);
+            $product->primerImagen = $imagenes[0];
+        }
+
+        return view('filter', compact('categories', 'nombreCategoria', 'subcategories', 'products'));
+    }
 }

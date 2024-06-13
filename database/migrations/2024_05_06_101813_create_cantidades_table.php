@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('cantidades', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger("idPedido");
-            $table->foreign("idPedido")->references("id")->on("pedidos")->onDelete("cascade");
+            $table->unsignedBigInteger("idFactura");
+            $table->foreign("idFactura")->references("id")->on("facturas")->onDelete("cascade");
             $table->unsignedBigInteger("idProducto");
             $table->foreign("idProducto")->references("id")->on("productos")->onDelete("cascade");
             $table->integer("cantidad");

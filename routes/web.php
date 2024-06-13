@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     ProductController,
     UserController,
     VerificationController,
-    PedidoController
+    PedidoController,
+    FiltraController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -52,9 +53,6 @@ Route::middleware('guest')->group(function () {
     Route::post('/inicia-sesion', [LoginController::class, 'login'])->name('inicia-sesion');
 });
 
-Route::get('/carrito', [CarritoController::class, 'index']);
-
-
 Route::middleware('admin')->group(function () {
     Route::get('/panel-de-control', [PanelController::class, 'index'])->name('panel.index');
     Route::get('/panel-de-control/create', [PanelController::class, 'create'])->name('panel.create');
@@ -69,6 +67,9 @@ Route::middleware('admin')->group(function () {
     Route::put('/usuarios/{id}', [UserController::class, 'update'])->name('users.update');
 });
 
-Route::get('/{nombreCategoria}/{nombreProducto}', [ProductController::class, 'index']);
-Route::get('/{nombreCategoria}', [FilterController::class, 'index']);
+
+Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito');
+Route::get('/{nombreCategoria}/filtrar', [FilterController::class, 'filtrar'])->name('categoria.filtrar');
+Route::get('/{nombreCategoria}/{nombreProducto}', [ProductController::class, 'index'])->name('producto');
+Route::get('/{nombreCategoria}', [FilterController::class, 'index'])->name('categoria');
 Route::get('/', [HomeController::class, 'index'])->name('home');

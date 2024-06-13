@@ -1,0 +1,17 @@
+.btn-componentes{
+    background-color: #FF6B00 !important;
+    color: white !important;
+    border-color: #7776769c !important;
+}
+
+.btn-componentes:hover{
+    background-color: #ff6a0094 !important;
+}
+
+h1{
+    color: #FF6B00 !important;
+}
+
+.border-custom{
+    border: 2px solid #777676 !important;
+}
