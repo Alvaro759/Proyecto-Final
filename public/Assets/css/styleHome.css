@@ -1,47 +1,51 @@
-html, body{
-    @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+html, body {
     height: 100%;
     font-family: "K2D", sans-serif !important;
 }
 
-div a{
+div a {
     color: black;
     text-decoration: none;
 }
 
-.text-color{
+.text-color {
     color: #009A06;
     font-weight: bold;
 }
 
-
-.AHover:hover{
+.AHover:hover {
     background-color: #77767620;
     border-radius: 0.25rem;
 }
 
-.container-custom{
+.link:hover {
+    color: #000 !important;
+}
+
+.container-custom {
     background-color: #7776767b;
 }
 
-.container-custom:hover{
+.container-custom:hover {
     background-color: #777676c1;
 }
 
-.bg-0{
+.bg-0 {
     background-color: #777676;
 }
 
-.bg-1{
+.bg-1 {
     background-color: #7776766f;
 }
 
-div h1 a{
+div h1 a {
     font-family: "K2D", sans-serif !important;
     color: #FF6B00;
 }
 
-div h1 a:hover{
+div h1 a:hover {
     background-color: #fff;
 }
 
@@ -121,40 +125,40 @@ div h1 a:hover{
     padding: 5px;
 }
 
-.border-custom{
+.border-custom {
     border: 2px solid #777676;
     border-radius: 1rem;
 }
 
-.border-custom-2{
+.border-custom-2 {
     border: 2px solid #777676;
 }
 
-.border-custom-3{
+.border-custom-3 {
     border: 1px solid #777676a8;
 }
 
-.button-custom-2{
+.button-custom-2 {
     border: 2px solid #7776767b;
     background-color: #fff;
 }
 
-.button-custom-2:hover{
+.button-custom-2:hover {
     background-color: #7776762e;
 }
 
-.button-custom-3{
+.button-custom-3 {
     border: 2px solid #FF6B00;
     background-color: #FF6B00;
     color: #fff;
 }
 
-.button-custom-3:hover{
+.button-custom-3:hover {
     background-color: #ff6a00a0;
     border: 2px solid #ff6a00a0;
 }
 
-.color{
+.color {
     color: #fff;
 }
 
@@ -163,7 +167,7 @@ div h1 a:hover{
     align-items: center;
 }
 
-input{
+input {
     outline: none;
     box-sizing: border-box;
     height: 2.6rem;
@@ -172,77 +176,85 @@ input{
     border: 0;
 }
 
-main{
+main {
     border-top: 1px solid #777676;
 }
 
-.button-custom{
+.button-custom {
     border: 0; 
     background-color: white;   
 }
 
-.btn-1{
+.btn-1 {
     border: 2px solid black;
     background-color: #7776767b;
 }
 
-.btn-1:hover{
+.btn-1:hover {
     background-color: #777676;
 }
 
-.button-custom:hover{
+.button-custom:hover {
     background-color: #77767620;
 }
 
 @media only screen and (max-width: 950px) {
-    .none{
+    .none {
         display: none;
     }
 
-    div h1{
-        display: none;
+    .w-25 {
+        width: 100% !important;
+    }
+
+    .w-75 {
+        width: 100% !important;
+    }
+
+    .flex-md-row {
+        flex-direction: column !important;
     }
 }
 
-li img{
+li img {
     border-radius: 2rem;
 }
 
-.slider-indicators>*{
+.slider-indicators>* {
     background-color: #000 !important;
 }
 
-.footer{
+.footer {
     background-color: #7776762e;
     height: 25%;
     width: auto;
     padding: 2rem;
 }
 
-.bold{
+.bold {
     font-weight: bold;
 }
 
-.box{
+.box {
     background-color: #fff;
     height: 100%;
     width: 25%;
 }
 
-.card-custom:hover{
+.card-custom:hover {
     background-color: #7776762e;
 }
 
-.checkbox{
+.checkbox {
     height: 0.8rem;
 }
 
-.span-custom{
+.span-custom {
     font-size: 2rem;
     color: #FF6B00;
 }
 
-.span-custom-2{
+.span-custom-2 {
     font-size: 1rem;
     color: #FF6B00;
 }
@@ -252,7 +264,7 @@ li img{
     margin: 0 auto;
 }
 
-.txt-color{
+.txt-color {
     color: #777676;
 }
 
