@@ -1,7 +1,7 @@
 <header class="mt-3">
     <div class="d-flex justify-content-evenly">
         <div class="d-flex align-items-center">
-            <h1><a href="{{ route('home') }}">TodoComponentes</a></h1>
+            <h1 class="none"><a href="{{ route('home') }}">TodoComponentes</a></h1>
         </div>
         <div class="d-flex border-custom">
             <div class="d-flex align-items-center">

@@ -26,7 +26,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'admin' => \App\Http\Middleware\Admin::class,
+        'admin' => \App\Http\Middleware\admin::class,
     ];
 
     /**

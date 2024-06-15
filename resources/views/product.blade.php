@@ -10,8 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="{{ asset('Assets/js/menu-desplegable.js') }}"></script>
 </head>
 
@@ -33,44 +32,44 @@
                 </div>
             </div>
         @endif
-        <div class="mt-3 ms-5 me-5">
-            <div><a class="AHover" href="/">Home</a> <svg xmlns="http://www.w3.org/2000/svg" height="24px"
-                    viewBox="0 -960 960 960" width="24px" fill="#777676">
+        <div class="mt-3 ms-3 ms-md-5 me-3 me-md-5">
+            <div>
+                <a class="AHover" href="/">Home</a> 
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#777676">
                     <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
-                </svg> <a class="AHover" href="{{ route('categoria', ['nombreCategoria' => $nombreCategoria])}}">{{ $nombreCategoria }}</a> <svg
-                    xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                    fill="#777676">
+                </svg> 
+                <a class="AHover" href="{{ route('categoria', ['nombreCategoria' => $nombreCategoria])}}">{{ $nombreCategoria }}</a> 
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#777676">
                     <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
-                </svg> <a class="AHover"
-                    href="/{{ $nombreCategoria }}/{{ $nombreProducto }}">{{ $nombreProducto }}</a>
+                </svg> 
+                <a class="AHover" href="{{ route('producto', ['nombreCategoria' => $nombreCategoria, 'nombreProducto' => $nombreProducto])}}">{{ $nombreProducto }}</a>
             </div>
-            <div class="d-flex mt-3">
-                <div>
+            <div class="d-flex flex-column flex-md-row mt-3">
+                <div class="text-center mb-3 mb-md-0">
                     <img src="{{ asset('Assets/img/productos/' . $product->imagenes[0]) }}"
-                        alt="{{ $nombreProducto }}" width="350px" height="350px">
+                        alt="{{ $nombreProducto }}" class="img-fluid" style="max-width: 350px;">
                 </div>
-                <div class="flex-column w-75">
-                    <div class="d-flex">
+                <div class="flex-column w-100 w-md-75">
+                    <div class="d-flex flex-column flex-md-row">
                         <div class="p-3">
                             <h1>{{ $nombreProducto }}</h1>
                         </div>
-                        <div class="p-3 flex-fill d-flex justify-content-end align-items-center">
+                        <div class="p-3 flex-fill d-flex justify-content-md-end align-items-center">
                             <span class="text-end span-custom">{{ $product->precio }}€</span>
                         </div>
                     </div>
                     <div class="border-custom-2 m-3">
                         <div class="d-flex flex-column-reverse p-3">
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-md-end">
                                 <p class="text-color">Envío gratis en pedidos superiores a 50€</p>
                             </div>
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-md-end">
                                 <p class="text-color">Recíbelo entre 3 - 5 días laborales</p>
                             </div>
-
                         </div>
-                        <div class="d-flex justify-content-end p-3">
-                            @Auth
-                                <form class="m-1" action="{{ route('carrito.add') }}" method="POST" class="mt-2">
+                        <div class="d-flex flex-column flex-md-row justify-content-end p-3">
+                            @auth
+                                <form class="m-1" action="{{ route('carrito.add') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <button type="submit" class="button-custom-2">Añadir al carrito</button>
@@ -93,9 +92,9 @@
                     <hr>
                 </div>
                 <div class="p-3 d-flex flex-column">
-                    @for ($i = 0; $i < count($product->caracteristicas); $i++)
-                        <span>{{ $product->caracteristicas[$i] }}</span>
-                    @endfor
+                    @foreach ($product->caracteristicas as $caracteristica)
+                        <span>{{ $caracteristica }}</span>
+                    @endforeach
                 </div>
             </div>
         </div>

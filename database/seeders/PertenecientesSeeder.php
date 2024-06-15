@@ -35,11 +35,11 @@ class PertenecientesSeeder extends Seeder
             ['idProducto' => 18, 'idSubcategoria' => 10, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['idProducto' => 19, 'idSubcategoria' => 9, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['idProducto' => 20, 'idSubcategoria' => 10, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['idProducto' => 21, 'idSubcategoria' => 40, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['idProducto' => 22, 'idSubcategoria' => 39, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['idProducto' => 23, 'idSubcategoria' => 51, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['idProducto' => 24, 'idSubcategoria' => 52, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['idProducto' => 25, 'idSubcategoria' => 54, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['idProducto' => 21, 'idSubcategoria' => 11, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['idProducto' => 22, 'idSubcategoria' => 12, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['idProducto' => 23, 'idSubcategoria' => 13, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['idProducto' => 24, 'idSubcategoria' => 14, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['idProducto' => 25, 'idSubcategoria' => 15, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['idProducto' => 26, 'idSubcategoria' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ]);
     }

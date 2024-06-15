@@ -24,8 +24,7 @@
     <main class="mt-3">
         @if (session('success') == 'Producto añadido al carrito')
             <div class="alert-wrapper mt-3">
-                <div class="alert alert-success alert-dismissible fade show session-alert small-alert"
-                    role="alert">
+                <div class="alert alert-success alert-dismissible fade show session-alert small-alert" role="alert">
                     Producto añadido al carrito correctamente.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -38,13 +37,12 @@
                 </div>
             </div>
         @elseif(session('success') == 'Pedido realizado correctamente.')
-        <div class="alert-wrapper mt-3">
-            <div class="alert alert-success alert-dismissible fade show session-alert small-alert"
-                role="alert">
-                Pedido realizado correctamente.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert-wrapper mt-3">
+                <div class="alert alert-success alert-dismissible fade show session-alert small-alert" role="alert">
+                    Pedido realizado correctamente.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
-        </div>
         @endif
         <div class="container mt-5">
             <div class="swiffy-slider">
@@ -77,7 +75,8 @@
 
                     @foreach ($products as $product)
                         <div class="col">
-                            <a href="{{route('producto', ['nombreCategoria' => $product->nombreCategoria, 'nombreProducto' => $product->nombre])}}">
+                            <a
+                                href="{{ route('producto', ['nombreCategoria' => $product->nombreCategoria, 'nombreProducto' => $product->nombre]) }}">
                                 <div class="card card-custom h-100">
                                     <img src="{{ asset('Assets/img/productos/' . $product->primerImagen) }}"
                                         class="card-img-top" alt="{{ $product->nombre }}">
@@ -86,8 +85,8 @@
                                         <p class="card-text">{{ $product->precio }}€</p>
                                         <div class="mt-2 d-flex justify-content-end">
                                             @if (Auth::check())
-                                                <form class="me-1" action="{{ route('carrito.add') }}"
-                                                    method="POST" class="mt-2">
+                                                <form class="me-1" action="{{ route('carrito.add') }}" method="POST"
+                                                    class="mt-2">
                                                     @csrf
                                                     <input type="hidden" name="product_id"
                                                         value="{{ $product->id }}">
@@ -95,10 +94,10 @@
                                                         carrito</button>
                                                 </form>
 
-                                                <a href="{{ route('pago.show')}}" class="button-custom-3">Comprar ya</a>
+                                                <a href="{{ route('pago.show') }}" class="button-custom-3">Comprar
+                                                    ya</a>
                                             @else
-                                                <a href="{{ route('login') }}"
-                                                    class="me-1 p-1 button-custom-2">Añadir
+                                                <a href="{{ route('login') }}" class="me-1 p-1 button-custom-2">Añadir
                                                     al
                                                     carrito</a>
                                                 <a href="{{ route('login') }}"
@@ -115,7 +114,7 @@
             </div>
         </div>
     </main>
-    
+
     @include('includes.footer')
 </body>
 
