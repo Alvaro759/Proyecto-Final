@@ -1,0 +1,47 @@
+html, body {
+  @import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+  height: 100%;
+  font-family: "K2D", sans-serif !important;
+}
+
+main {
+  height: 100%;
+  width: 50%;
+}
+
+div h3 {
+  color: #FF6B00;
+  font-family: "K2D", sans-serif;
+}
+
+.form-control {
+  border-radius: 0 !important;
+  font-family: "K2D", sans-serif !important;
+}
+
+.btn-custom {
+  border-radius: 0 !important;
+  color: white !important;
+  background-color: #FF6B00 !important;
+  font-family: "K2D", sans-serif !important;
+}
+
+div a {
+  color: black;
+}
+
+.btn-custom2 {
+  border-radius: 0 !important;
+  color: black !important;
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+  font-family: "K2D", sans-serif !important;
+}
+
+.bg-custom {
+  background-color: #EFEFEF;
+}
+
+#flexCheckDefault {
+  border-radius: 0 !important;
+}

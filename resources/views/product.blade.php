@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $nombreProducto }} | TodoComponentes</title>
-    <link rel="stylesheet" href="{{ asset('Assets/css/styleHome.css') }}">
+    <link rel="stylesheet" href="{{ asset('Assets/scss/css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -79,8 +79,8 @@
                                     <a href="{{ route('pago.show') }}" class="color">Comprar ya</a>
                                 </div>
                             @else
-                                <a href="{{ route('login') }}" class="m-1 p-1 button-custom-2">Añadir al carrito</a>
-                                <a href="{{ route('login') }}" class="m-1 p-1 button-custom-3">Comprar ya</a>
+                                <a href="{{ route('login') }}" class="m-1 p-1 button-custom-2 text-center">Añadir al carrito</a>
+                                <a href="{{ route('login') }}" class="m-1 p-1 button-custom-3 text-center">Comprar ya</a>
                             @endauth
                         </div>
                     </div>
